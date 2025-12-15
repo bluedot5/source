@@ -1,25 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Open URL</title>
-</head>
-<body>
+import webbrowser
 
-  <input type="text" id="urlInput" placeholder="Enter a website URL">
-  <button onclick="openWebsite()">Go</button>
+websites = [
+    "https://www.google.com",
+    "https://www.youtube.com",
+    "https://www.github.com"
+]
 
-  <script>
-    function openWebsite() {
-      let url = document.getElementById("urlInput").value;
-
-      // Add https:// if missing
-      if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        url = "https://" + url;
-      }
-
-      window.open(url, "_blank"); // opens in a new tab
-    }
-  </script>
-
-</body>
-</html>
+for site in websites:
+    webbrowser.open(site)
