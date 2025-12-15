@@ -1,77 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>SimpleSearch</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Search Inside Site</title>
   <style>
     body {
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 50px;
+      padding: 50px;
     }
-    input {
-      width: 400px;
+    input[type="text"] {
+      width: 300px;
       padding: 10px;
       font-size: 16px;
     }
-    button {
-      padding: 10px 15px;
+    input[type="submit"] {
+      padding: 10px 20px;
       font-size: 16px;
     }
-    .result {
-      text-align: left;
-      margin: 15px auto;
-      width: 500px;
-    }
-    a {
-      text-decoration: none;
-      color: blue;
+    iframe {
+      margin-top: 20px;
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ccc;
     }
   </style>
 </head>
 <body>
+  <h1>Search Google</h1>
+  <form id="searchForm" target="googleFrame">
+    <input type="text" name="q" placeholder="Type your search here">
+    <input type="submit" value="Search">
+  </form>
 
-<h1>SimpleSearch</h1>
-<input id="q" placeholder="Search something">
-<button onclick="search()">Search</button>
-
-<div id="results"></div>
-
-<script>
-async function search() {
-  const query = document.getElementById("q").value;
-  const res = await fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_redirect=1`);
-  const data = await res.json();
-
-  const resultsDiv = document.getElementById("results");
-  resultsDiv.innerHTML = "";
-
-  if (data.RelatedTopics && data.RelatedTopics.length) {
-    data.RelatedTopics.forEach(item => {
-      if (item.Text && item.FirstURL) {
-        resultsDiv.innerHTML += `
-          <div class="result">
-            <a href="${item.FirstURL}" target="_blank"><h3>${item.Text}</h3></a>
-          </div>
-        `;
-      }
-      // Some items have subtopics
-      if (item.Topics) {
-        item.Topics.forEach(sub => {
-          if (sub.Text && sub.FirstURL) {
-            resultsDiv.innerHTML += `
-              <div class="result">
-                <a href="${sub.FirstURL}" target="_blank"><h3>${sub.Text}</h3></a>
-              </div>
-            `;
-          }
-        });
-      }
-    });
-  } else {
-    resultsDiv.innerHTML = "<p>No results found.</p>";
-  }
-}
-</script>
-
+  <iframe name="googleFrame"></iframe>
 </body>
 </html>
