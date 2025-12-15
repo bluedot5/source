@@ -1,10 +1,19 @@
-import webbrowser
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Open Google</title>
+</head>
+<body>
+  <button onclick="openGoogle()">Open Google</button>
 
-websites = [
-    "https://www.google.com",
-    "https://www.youtube.com",
-    "https://www.github.com"
-]
-
-for site in websites:
-    webbrowser.open(site)
+  <script>
+    function openGoogle() {
+      window.open(
+        "https://www.google.com",
+        "_blank",
+        "width=1200,height=800"
+      );
+    }
+  </script>
+</body>
+</html>
