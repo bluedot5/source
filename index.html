@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Open URL</title>
+  <title>Hidden URL Viewer</title>
+  <style>
+    iframe {
+      width: 100%;
+      height: 95vh;
+      border: none;
+    }
+  </style>
 </head>
 <body>
 
   <input type="text" id="urlInput" placeholder="google.com">
   <button onclick="openWebsite()">Go</button>
 
+  <iframe id="viewer"></iframe>
+
   <script>
     function openWebsite() {
       let url = document.getElementById("urlInput").value;
 
-      // Add https:// if missing
       if (!url.startsWith("http://") && !url.startsWith("https://")) {
         url = "https://" + url;
       }
 
-      window.open(url, "_blank"); // opens in a new tab
+      document.getElementById("viewer").src = url;
     }
   </script>
 
