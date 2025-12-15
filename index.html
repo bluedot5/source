@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Search Inside Site</title>
+  <title>Embedded Google Search</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 50px;
+      margin: 20px;
     }
     input[type="text"] {
       width: 300px;
@@ -28,12 +28,22 @@
   </style>
 </head>
 <body>
-  <h1>Search Google</h1>
-  <form id="searchForm" target="googleFrame">
-    <input type="text" name="q" placeholder="Type your search here">
+  <h1>Search Google Inside This Page</h1>
+  <form id="searchForm" onsubmit="return searchGoogle()">
+    <input type="text" id="query" placeholder="Type your search here" required>
     <input type="submit" value="Search">
   </form>
 
-  <iframe name="googleFrame"></iframe>
+  <iframe id="googleFrame"></iframe>
+
+  <script>
+    function searchGoogle() {
+      const query = document.getElementById('query').value;
+      const iframe = document.getElementById('googleFrame');
+      // Load Google search results for the query inside the iframe
+      iframe.src = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      return false; // Prevent form from reloading the page
+    }
+  </script>
 </body>
 </html>
