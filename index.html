@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MySearch</title>
+  <title>SafeSearch</title>
   <style>
     body {
       text-align: center;
@@ -17,39 +17,30 @@
       padding: 12px;
       font-size: 18px;
     }
-    .result {
-      text-align: left;
-      margin: 20px auto;
-      width: 600px;
+    iframe {
+      margin-top: 20px;
+      width: 80%;
+      height: 70vh;
+      border: 1px solid #ccc;
     }
   </style>
 </head>
 <body>
 
-<h1>MySearch</h1>
+<h1>SafeSearch</h1>
 <input id="q" placeholder="Search the web">
 <button onclick="search()">Search</button>
 
-<div id="results"></div>
+<br>
+<iframe id="resultsFrame"></iframe>
 
 <script>
-async function search() {
-  const q = document.getElementById("q").value;
-  const res = await fetch(`/search?q=${encodeURIComponent(q)}`);
-  const data = await res.json();
-
-  const div = document.getElementById("results");
-  div.innerHTML = "";
-
-  data.webPages.value.forEach(r => {
-    div.innerHTML += `
-      <div class="result">
-        <a href="${r.url}" target="_blank"><h3>${r.name}</h3></a>
-        <p>${r.snippet}</p>
-      </div>
-    `;
-  });
-}
+  function search() {
+    const query = document.getElementById("q").value;
+    // Use DuckDuckGo search
+    const url = `https://duckduckgo.com/?q=${encodeURIComponent(query)}&t=h_&ia=web`;
+    document.getElementById("resultsFrame").src = url;
+  }
 </script>
 
 </body>
